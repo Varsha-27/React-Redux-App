@@ -16,6 +16,9 @@ const NavigationBar = () => {
             <Nav.Link as={Link} to="/">
               Products
             </Nav.Link>
+            <Nav.Link as={Link} to="/wishList">
+              Wishlist
+            </Nav.Link>
           </Nav>
           <Navbar.Text>
             <Nav.Link as={Link} to="/cart">

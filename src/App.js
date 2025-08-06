@@ -1,7 +1,7 @@
 import "./App.css";
 import Cart from "./components/Cart";
 import Dashboard from "./components/Dashboard";
-import Product from "./components/Product";
+import WishList from "./components/WishList"
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -16,6 +16,7 @@ function App() {
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Dashboard />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
+        <Route path="/wishList" element={<WishList />}></Route>
       </Route>
     )
   );

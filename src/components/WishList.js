@@ -1,17 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { remove ,add} from "../store/cartSlice";
+import { removeFromWishList } from "../store/wishListSlice";
 
-const Cart = () => {
-  const products = useSelector((state) => state.cart);
+const WishList = () => {
+  const products = useSelector((state) => state.wishList);
   const dispatch = useDispatch();
-  const incrementQuantity = (product) => {
-    dispatch(add(product)); // Uses same add reducer
-  };
-
-  const decrementQuantity = (id) => {
-    dispatch(remove(id)); // Uses updated remove reducer
+  const handleRemoveFromWishList = (id) => {
+    dispatch(removeFromWishList(id));
   };
   const cards = products.map((product) => (
     <div
@@ -33,24 +29,21 @@ const Cart = () => {
           <Card.Text>INR: {product.price}</Card.Text>
         </Card.Body>
         <Card.Footer style={{ backgroundColor: "white" }}>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-           <Button variant="danger" onClick={() => decrementQuantity(product.id)}>
-              -
-            </Button>
-            <span style={{ margin: "0 10px" }}>{product.quantity}</span>
-            <Button variant="success" onClick={() => incrementQuantity(product)}>
-              +
-            </Button>
-          </div>
+          <Button
+            variant="danger"
+            onClick={() => handleRemoveFromWishList(product.id)}
+          >
+            Remove Item
+          </Button>
         </Card.Footer>
       </Card>
     </div>
   ));
   return (
     <div className="row">
-      <h2 className="text-center my-4">Cart Dashboard</h2>
+      <h2 className="text-center my-4">Wishlist</h2>
       {cards}
     </div>
   );
 };
-export default Cart;
+export default WishList;
