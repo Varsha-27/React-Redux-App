@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { add } from "../store/cartSlice";
 import { addToWishlist, removeFromWishList } from "../store/wishListSlice";
-
+import Spinner from 'react-bootstrap/Spinner';
 import { getProducts } from "../store/productSlice";
 import Alert from "react-bootstrap/Alert";
 import StatusCode from "../utils/StatusCode";
@@ -18,8 +18,22 @@ const Product = () => {
   }, []);
 
   if (status === StatusCode.LOADING) {
-    return <p>Loading.....</p>;
-  }
+  return (
+    <div
+      style={{
+        height: "70vh", // gives vertical space to center within
+        display: "flex",
+        justifyContent: "center", // center horizontally
+        alignItems: "center",     // center vertically
+      }}
+    >
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    </div>
+  );
+}
+
   if (status === StatusCode.ERROR) {
     return (
       <Alert key="danger" variant="danger">

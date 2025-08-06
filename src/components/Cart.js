@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { remove ,add} from "../store/cartSlice";
+import { remove, add } from "../store/cartSlice";
 
 const Cart = () => {
   const products = useSelector((state) => state.cart);
@@ -34,12 +34,18 @@ const Cart = () => {
         </Card.Body>
         <Card.Footer style={{ backgroundColor: "white" }}>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-           <Button variant="danger" onClick={() => decrementQuantity(product.id)}>
-              -
+            <Button
+              variant="success"
+              onClick={() => incrementQuantity(product)}
+            >
+              +
             </Button>
             <span style={{ margin: "0 10px" }}>{product.quantity}</span>
-            <Button variant="success" onClick={() => incrementQuantity(product)}>
-              +
+            <Button
+              variant="danger"
+              onClick={() => decrementQuantity(product.id)}
+            >
+              -
             </Button>
           </div>
         </Card.Footer>
@@ -48,7 +54,23 @@ const Cart = () => {
   ));
   return (
     <div className="row">
-      <h2 className="text-center my-4">Cart Dashboard</h2>
+      {products.length > 0 ? (
+        <h2 className="text-center my-4">Cart Dashboard</h2>
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "70vh", // Adjust height as needed
+            width: "100%",
+          }}
+        >
+          <h3 style={{ color: "#888" }}>
+            There is nothing in your bag. Let's add some items
+          </h3>
+        </div>
+      )}
       {cards}
     </div>
   );
